@@ -1,20 +1,24 @@
 import React from 'react';
 import './App.css';
-import Home from "./Home/Home";
 import Header from "./Header/Header";
 import Content from "./Content/Content";
 import Footer from "./Footer/Footer";
+import {element} from "prop-types";
 
-function App() {
-  return (
+const App = props => (
     <div className="App">
-        <Header title="Welcome to Codejobs"/>
+        <Header title="Routing" />
+
         <Content>
-            <Home/>
+            {props.children}
         </Content>
-        <Footer/>
+
+        <Footer />
     </div>
-  );
-}
+);
+
+App.propTypes = {
+    children: element
+};
 
 export default App;
