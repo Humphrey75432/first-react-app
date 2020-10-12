@@ -8,6 +8,7 @@ import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Notes from "./components/Notes/Notes";
 import Todo from "./components/Todo";
+import Animations from "./components/Animations";
 
 const AppRoutes = () => (
     <App>
@@ -18,6 +19,7 @@ const AppRoutes = () => (
             <Route path="/notes" component={Notes} exact />
             <Route path="/notes/:noteId" component={Notes} exact />
             <Route path="/todo" component={Todo} exact/>
+            <Route path="/animate" component={Animations} exact/>
             <Route component={Error404}/>
         </Switch>
     </App>
