@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import uuidv4 from 'uuid-v4';
 import './Todo.css';
 import List from "./List";
+import TodoForm from "./TodoForm";
 
 class Todo extends Component {
     constructor() {
@@ -13,24 +14,14 @@ class Todo extends Component {
         };
     }
 
-    handleOnChange = e => {
-        const { target: { value } } = e;
-
+    addTask = values => {
+        const { task } = values;
         this.setState({
-            task: value
-        });
-    }
-
-    handleOnSubmit = e => {
-        e.preventDefault();
-
-        this.setState({
-            task: '',
             items: [
                 ...this.state.items,
                 {
                     id: uuidv4(),
-                    task: this.state.task,
+                    task,
                     complete: false
                 }
             ]
@@ -42,13 +33,7 @@ class Todo extends Component {
             <div className="Todo">
                 <h1>New Task:</h1>
 
-                <form onSubmit={this.handleOnSubmit}>
-                    <input
-                        value={this.state.task}
-                        onChange={this.handleOnChange}
-                    />
-                </form>
-
+                <TodoForm addTask={this.addTask}/>
                 <List items={this.state.items}/>
             </div>
         );
