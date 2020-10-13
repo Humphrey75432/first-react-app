@@ -1,26 +1,64 @@
 import React, {Component} from "react";
-import { fadeIn, bounce } from 'react-animations';
-import Radium, { StyleRoot } from "radium";
+import  posed from 'react-pose';
+import styled from 'styled-components';
+import './Animations.css';
 
-const styles = {
-    fadeIn: {
-        animation: 'x 1s',
-        animationName: Radium.keyframes(fadeIn, 'fadeIn')
+const Circle = posed.div({
+    normal: {
+        scale: 1
     },
-    bounce: {
-        animation: 'x 1s',
-        animationName: Radium.keyframes(bounce, 'bounce')
+    hover: {
+        scale: 3
     }
-};
+});
+
+const StyledCircle = styled(Circle)`
+    color: white;
+    cursor: pointer;
+    background: blue;
+    line-height: 80px;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+`;
 
 class Animations extends Component {
+    state = {
+        bg: 'blue',
+        hover: false
+    };
+    handleMouseEnter = () => {
+        this.setState({
+            hover: true
+        });
+    }
+
+    handleMouseLeave = () => {
+        this.setState({
+            hover: false
+        });
+    }
+    handleOnClick = () => {
+        const colors = ['red', 'green', 'gray', 'orange', 'black', 'pink'];
+
+        this.setState({
+            bg: colors[Math.floor(Math.random() * colors.length)]
+        });
+    }
+
     render() {
         return (
-            <StyleRoot>
-                <div className="Animations" style={styles.fadeIn}>
-                    <h1>This text will be animated</h1>
-                </div>
-            </StyleRoot>
+            <div className="Animations">
+                <StyledCircle
+                    pose={this.state.hover ? 'hover' : 'normal'}
+                    onMouseEnter={this.handleMouseEnter}
+                    onMouseLeave={this.handleMouseLeave}
+                    onClick={this.handleOnClick}
+                    style={{ background: this.state.bg }}
+                >
+                    Click me!
+                </StyledCircle>
+            </div>
         );
     }
 }
